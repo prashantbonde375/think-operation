@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Students</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+</head>
+
+<body class="bg-light">
+
+    <div class="container mt-5">
+        <!-- ✅ Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>🎓 Student List</h2>
+            <a href="/ui/logout" class="btn btn-danger">Logout</a>
+        </div>
+
+        <!-- ✅ Add / Update Student Form -->
+        <div class="card p-4 mb-4 shadow-sm">
+            <h5 class="mb-3">Add or Update Student</h5>
+            <form th:action="@{/ui/student/add}" method="post" class="row g-3">
+                <div class="col-md-3">
+                    <input type="text" name="name" class="form-control" placeholder="Student Name" required>
+                </div>
+                <div class="col-md-3">
+                    <input type="email" name="email" class="form-control" placeholder="Email" required>
+                </div>
+                <div class="col-md-2">
+                    <input type="text" name="course" class="form-control" placeholder="Course" required>
+                </div>
+                <div class="col-md-2">
+                    <input type="number" name="collegeId" class="form-control" placeholder="College ID" required>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-success w-100">Add Student</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- ✅ Student Table -->
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <table class="table table-bordered table-striped align-middle mb-0">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Course</th>
+                            <th>College ID</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="student : ${students}">
+                            <td th:text="${student.id}"></td>
+                            <td th:text="${student.name}"></td>
+                            <td th:text="${student.email}"></td>
+                            <td th:text="${student.course}"></td>
+                            <td th:text="${student.collegeId}"></td>
+                            <td>
+                                <form th:action="@{'/ui/student/update/' + ${student.id}}" method="post"
+                                    class="d-inline">
+                                    <input type="hidden" name="name" th:value="${student.name}">
+                                    <input type="hidden" name="email" th:value="${student.email}">
+                                    <input type="hidden" name="course" th:value="${student.course}">
+                                    <input type="hidden" name="collegeId" th:value="${student.collegeId}">
+                                    <button class="btn btn-warning btn-sm">Update</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ✅ Navigation -->
+        <div class="text-center mt-4">
+            <a href="/ui/colleges" class="btn btn-primary">Back to Colleges</a>
+        </div>
+    </div>
+
+</body>
+
+</html>
