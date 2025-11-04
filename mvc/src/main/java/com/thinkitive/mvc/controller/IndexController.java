@@ -56,7 +56,7 @@ public class IndexController {
         return "college-list";
     }
 
-    // ✅ DELETE: Delete a college
+    // Using Resttemplate
     @GetMapping("/college/delete/{id}")
     public String deleteCollege(@PathVariable Long id) {
         restTemplate.delete(GATEWAY_URL + "/api/college/" + id);
@@ -71,7 +71,7 @@ public class IndexController {
         return "students";
     }
 
-    // ✅ GET: Get all students by college ID
+    // Using Resttemplate
     @GetMapping("/students/college/{collegeId}")
     public String getStudentsByCollege(@PathVariable Long collegeId, Model model) {
         List<?> students = restTemplate.getForObject(GATEWAY_URL + "/api/student/college/" + collegeId, List.class);
@@ -80,6 +80,7 @@ public class IndexController {
         return "students"; // View: students.html
     }
 
+    // using restTemplate
     @PostMapping("/student/add")
     public String addStudent(@RequestParam String name,
             @RequestParam String email,
@@ -107,6 +108,7 @@ public class IndexController {
         return "redirect:/ui/students";
     }
 
+    //using restTemplate
     @PostMapping("/student/update/{id}")
     public String updateStudent(@PathVariable Long id,
             @RequestParam String name,

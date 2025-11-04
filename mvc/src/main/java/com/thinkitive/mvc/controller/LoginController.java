@@ -33,7 +33,8 @@ public class LoginController {
         return "register";
     }
 
-    // --- Register new user ---
+    // restTemplate
+    // --- Register new user 
     @PostMapping("/register")
     public String register(@ModelAttribute User user, Model model) {
         try {
@@ -45,6 +46,8 @@ public class LoginController {
             return "register";
         }
     }
+
+    // restTemplate
 
     @PostMapping("/login")
     public String login(@RequestParam String username,
