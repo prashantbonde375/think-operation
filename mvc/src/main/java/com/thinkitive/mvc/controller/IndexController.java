@@ -53,7 +53,7 @@ public class IndexController {
 
         List<?> colleges = collegeClient.getAllColleges();
         model.addAttribute("colleges", colleges);
-        return "college-list";
+        return "colleges";
     }
 
     // Using Resttemplate
